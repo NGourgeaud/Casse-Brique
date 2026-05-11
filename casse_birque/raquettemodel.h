@@ -3,8 +3,24 @@
 
 class RaquetteModel
 {
+private:
+    int itsPosX;
+    int itsPosY;
+    int itsHauteur;
+    int itsLargeur;
+    float itsSpeed;
+
 public:
-    RaquetteModel();
+    RaquetteModel(int posX, int posY, int largeur, int hateur, int speed);
+    int getItsPosX() const;
+    int getItsPosY() const;
+    int getItsHauteur() const;
+    int getItsLargeur() const;
+    int getItsSpeed() const;
+
+    void setPosX(int newX);
+    void moveRight();
+    void moveLeft();
 };
 
 #endif // RAQUETTEMODEL_H
