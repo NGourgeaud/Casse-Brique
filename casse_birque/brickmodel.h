@@ -13,6 +13,7 @@ public:
     BrickModel(int x, int y, int hp);
     int getItsX();
     int getItsY();
+    int getItsHP();
     QRect getItsRect();
 public slots:
     void onHit();

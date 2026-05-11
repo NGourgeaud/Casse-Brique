@@ -18,6 +18,11 @@ int BrickModel::getItsY()
     return itsY;
 }
 
+int BrickModel::getItsHP()
+{
+    return itsHP;
+}
+
 QRect BrickModel::getItsRect()
 {
     return itsRect;
