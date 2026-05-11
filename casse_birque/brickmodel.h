@@ -10,10 +10,14 @@ private :
     QRect itsRect;
     int itsHP;
 public:
-    BrickModel y, int hp, int hp);
+    BrickModel(int x, int y, int hp);
     int getItsX();
     int getItsY();
     QRect getItsRect();
+public slots:
+    void onHit();
+signals:
+    void OnDeath();
 };
 
 #endif // BRICKMODEL_H
