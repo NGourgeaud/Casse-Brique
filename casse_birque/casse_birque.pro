@@ -30,6 +30,7 @@ HEADERS += \
     brickcontroller.h \
     brickmodel.h \
     brickview.h \
+    config.h \
     gamecontroler.h \
     mainwindow.h \
     menucontroler.h \

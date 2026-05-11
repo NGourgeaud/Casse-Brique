@@ -1,7 +1,7 @@
 #include "brickmodel.h"
 #include "config.h"
 
-BrickModel::BrickModel(int hp, int x, int y) {
+BrickModel::BrickModel(int x, int y, int hp) {
     itsHP = hp;
     itsX = x;
     itsY = y;
@@ -21,4 +21,11 @@ int BrickModel::getItsY()
 QRect BrickModel::getItsRect()
 {
     return itsRect;
+}
+
+void BrickModel::onHit()
+{
+    itsHP-=1;
+    if (itsHP == 0)
+        OnDeath();
 }

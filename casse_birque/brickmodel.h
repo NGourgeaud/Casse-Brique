@@ -10,7 +10,7 @@ private :
     QRect itsRect;
     int itsHP;
 public:
-    BrickModel();
+    BrickModel y, int hp, int hp);
     int getItsX();
     int getItsY();
     QRect getItsRect();
