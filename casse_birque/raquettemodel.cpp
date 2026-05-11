@@ -1,8 +1,5 @@
 #include "raquettemodel.h"
 
-RaquetteModel::RaquetteModel() {}
-#include "raquettemodel.h"
-
 RaquetteModel::RaquetteModel(int posX, int posY, int largeur, int hauteur, int speed){
     itsPosX = posX;
     itsPosY = posY;
