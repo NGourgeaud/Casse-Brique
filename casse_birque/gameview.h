@@ -8,7 +8,7 @@
 #include <QWidget>
 
 
-class GameView : QWidget
+class GameView : public QWidget
 {
     Q_OBJECT
 
@@ -17,6 +17,8 @@ private:
     BallView * balle;
     BrickView* brick;
     const GameModel * itsGameModel;
+
+    void drawBackGround(QPainter *p);
 protected:
     void paintEvent(QPaintEvent* event)  override;
 public:
