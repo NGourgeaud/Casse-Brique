@@ -1,9 +1,12 @@
 #ifndef BRICKMODEL_H
 #define BRICKMODEL_H
+#include "qobject.h"
 #include <QRect>
 
-class BrickModel
+class BrickModel : public QObject
 {
+    Q_OBJECT
+
 private :
     int itsX;
     int itsY;
