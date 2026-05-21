@@ -6,14 +6,25 @@
 #include "raquettemodel.h"
 #include <QObject>
 
-class GameModel
+class GameModel : public QObject
 {
+    Q_OBJECT
+
 private:
-    RaquetteModel raquette;
-    BallModel ball;
-    QList<BrickModel> bricks;
+    RaquetteModel * raquette;
+    BallModel * ball;
+    QList<BrickModel*> * bricks;
+    int itsHP;
+    int itsScore;
 public:
     GameModel();
+    const RaquetteModel* getItsRaquette();
+    const BallModel* getItsball();
+    const QList<BrickModel*>* getItsBricks();
+    int getItsHP();
+    int getItsScore();
+signals:
+    void GameOver(int score);
 };
 
 #endif // GAMEMODEL_H
