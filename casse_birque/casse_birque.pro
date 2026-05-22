@@ -7,10 +7,8 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    ballcontroler.cpp \
     ballmodel.cpp \
     ballview.cpp \
-    brickcontroller.cpp \
     brickmodel.cpp \
     brickview.cpp \
     gamecontroler.cpp \
@@ -19,7 +17,6 @@ SOURCES += \
     menucontroler.cpp \
     menumodel.cpp \
     menuview.cpp \
-    raquettecontroler.cpp \
     raquettemodel.cpp \
     raquetteview.cpp
 

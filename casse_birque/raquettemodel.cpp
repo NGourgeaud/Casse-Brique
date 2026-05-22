@@ -31,6 +31,12 @@ int RaquetteModel::getItsPosY() const{
 int RaquetteModel::getItsSpeed() const{
     return itsSpeed;
 }
+// Setter
+
+
+void RaquetteModel::setPosX(int newX) {
+    itsPosX = newX;
+}
 
 // Methode
 
