@@ -1,20 +1,28 @@
 #ifndef BALLMODEL_H
 #define BALLMODEL_H
 
+#include <QRect>
+#include <list>
+#include "brickmodel.h"
+#include "raquettemodel.h"
+
+
 class BallModel
 {
 private :
-    float itsPosX;
-    float itsPosY;
-    int itsRadius;
-    float itsSpeedX;
-    float itsSpeedY;
-    int itsDamage;
-    float itsGravity;
+    QRect itsHitBox;
+    double itsSpeedX;
+    double itsSpeedY;
     bool itsOnTheGround;
 public:
-    BallModel(float startPosX, float startPosY);
-    void move();
+    BallModel(double startPosX, double startPosY);
+    void move(const std::list<BrickModel*>& allBricks, const RaquetteModel &laRaquette);    void collisionRaquette(const RaquetteModel& laRaquette);
+    void collisionBrick(const QRect &brick);
+    void collisionWall();
+
+    void setItsSpeedX(double newItsSpeedX);
+    void setItsSpeedY(double newItsSpeedY);
+    QRect getItsHitBox() const;
 };
 
 #endif // BALLMODEL_H

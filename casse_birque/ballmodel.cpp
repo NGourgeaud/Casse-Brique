@@ -1,18 +1,173 @@
 #include "ballmodel.h"
+#include "config.h"
 
-BallModel::BallModel(float startPosX, float startPosY) {
-    itsPosX = startPosX;
-    itsPosY = startPosY;
-    itsRadius = 10;
-    itsSpeedX = 5;
-    itsSpeedY = 5;
-    itsDamage = 1;
+void BallModel::setItsSpeedX(double newItsSpeedX)
+{
+    itsSpeedX = newItsSpeedX;
+}
+
+void BallModel::setItsSpeedY(double newItsSpeedY)
+{
+    itsSpeedY = newItsSpeedY;
+}
+
+QRect BallModel::getItsHitBox() const
+{
+    return itsHitBox;
+}
+
+BallModel::BallModel(double startPosX, double startPosY)
+    : itsHitBox(startPosX, startPosY, 20, 20)
+{
+    itsSpeedX = 0;
+    itsSpeedY = 0;
     itsOnTheGround = false;
 }
 
-void BallModel::move(){
+void BallModel::move(const std::list<BrickModel*>& allBricks, const RaquetteModel& Raquette){
     // Faire en sorte que si la balle ne touche rien on ajoute au coordonnée
 
-    //Si la balle touche/en collision elle va dans sans oppose ou symetrique
-    //Regarder dans le mario MVC
+    // Déplacement de la bale
+    itsHitBox.translate(itsSpeedX, itsSpeedY);
+
+    // Vérification de la collision
+    collisionRaquette(Raquette);
+    for (BrickModel * brick : allBricks)
+        collisionBrick(brick->getRect());
+    collisionWall();
+
+    // Empêche la balle de rebondir à l'infinie sur un axe
+    if(itsSpeedX == 0){
+        itsSpeedX = 1;
+    }
+    else if(itsSpeedY == 0) {
+        itsSpeedY = 1;
+    }
+}
+
+void BallModel::collisionRaquette(const RaquetteModel& laRaquette){
+
+    // On dessine la raquette virtuellement avec un QRect
+    QRect Raquette(laRaquette.getItsPosX(),laRaquette.getItsPosY(),laRaquette.getItsLargeur(),laRaquette.getItsHauteur());
+
+    // Contient la zone où les deux rectangles se touchent
+    QRect inter = itsHitBox.intersected(Raquette);
+
+    // Pas de collision
+    if (inter.isEmpty())
+        return ;
+
+    // Si il y a une collision = rebond
+    // CAS 1 : Colision en haut ou en bas de la raquette
+    if (inter.width() > inter.height()) {
+        // CORRECTION ICI : < au lieu de >
+        if(itsHitBox.center().y() < Raquette.center().y()){
+            itsHitBox.moveBottom(Raquette.top());
+        }
+        else{
+            itsHitBox.moveTop(Raquette.bottom());
+        }
+        itsSpeedY = -itsSpeedY;
+    }
+    // CAS 2 : Colision sur les côtés de la raquette (gauche ou droit)
+    else if (inter.height() > inter.width()) {
+        if(itsHitBox.center().x() < Raquette.center().x()){
+            itsHitBox.moveRight(Raquette.left());
+        }
+        else{
+            itsHitBox.moveLeft(Raquette.right());
+        }
+
+        itsSpeedX = -itsSpeedX;
+    }
+    // CAS 3 : Colision pile sur un coin (largeur == hauteur)
+    else {
+        if(itsHitBox.center().y() < Raquette.center().y()){
+            itsHitBox.moveBottom(Raquette.top());
+        }
+        else{
+            itsHitBox.moveTop(Raquette.bottom());
+        }
+
+        if(itsHitBox.center().x() < Raquette.center().x()){
+            itsHitBox.moveRight(Raquette.left());
+        }
+        else{
+            itsHitBox.moveLeft(Raquette.right());
+        }
+
+        itsSpeedX = -itsSpeedX;
+        itsSpeedY = -itsSpeedY;
+    }
+}
+
+void BallModel::collisionBrick(const QRect& brick){
+
+    // Contient la zone où les deux rectangles se touchent
+    QRect inter = itsHitBox.intersected(brick);
+
+    // Pas de collision
+    if (inter.isEmpty())
+        return;
+
+    // Si il y a une collision = rebond
+    // CAS 1 : Colision en haut ou en bas de la brique
+    if (inter.width() > inter.height()) {
+        if(itsHitBox.center().y() < brick.center().y()) {
+            itsHitBox.moveBottom(brick.top());
+        } else {
+            itsHitBox.moveTop(brick.bottom());
+        }
+        itsSpeedY = -itsSpeedY;
+    }
+    // CAS 2 : Colision sur les côtés de la brique (gauche ou droit)
+    else if (inter.height() > inter.width()) {
+        if(itsHitBox.center().x() < brick.center().x()) {
+            itsHitBox.moveRight(brick.left());
+        } else {
+            itsHitBox.moveLeft(brick.right());
+        }
+        itsSpeedX = -itsSpeedX;
+    }
+    // CAS 3 : Colision pile sur un coin (largeur == hauteur)
+    else {
+        if(itsHitBox.center().y() < brick.center().y()) {
+            itsHitBox.moveBottom(brick.top());
+        } else {
+            itsHitBox.moveTop(brick.bottom());
+        }
+
+        if(itsHitBox.center().x() < brick.center().x()) {
+            itsHitBox.moveRight(brick.left());
+        } else {
+            itsHitBox.moveLeft(brick.right());
+        }
+
+        itsSpeedX = -itsSpeedX;
+        itsSpeedY = -itsSpeedY;
+    }
+}
+
+void BallModel::collisionWall(){
+
+    // Si le bord gauche du rectangle dépasse ou touche 0
+    if (itsHitBox.left() <= 0) {
+        itsHitBox.moveLeft(0);
+        itsSpeedX = -itsSpeedX;
+    }
+    // Si le bord droit du rectangle dépasse la largeur de l'écran
+    else if (itsHitBox.right() >= windowWidth) {
+        itsHitBox.moveRight(windowWidth);
+        itsSpeedX = -itsSpeedX;
+    }
+
+    // Si le bord haut dépasse ou touche 0
+    if (itsHitBox.top() <= 0) {
+        itsHitBox.moveTop(0);
+        itsSpeedY = -itsSpeedY;
+    }
+    // Si le bord bas (sol) dépasse la hauteur de l'écran
+    else if (itsHitBox.bottom() >= windowHeight) {
+       itsOnTheGround = true;
+    }
 }
