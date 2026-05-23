@@ -17,7 +17,7 @@ private:
     int itsHP;
     int itsScore;
 
-    void level1();
+    void Testlevel();
 public:
     GameModel();
     const RaquetteModel* getItsRaquette() const;
@@ -27,6 +27,11 @@ public:
     int getItsScore() const;
 signals:
     void GameOver(int score);
+public slots:
+    void setMovementLeft(bool sw);
+    void setMovementRight(bool sw);
+
+    void RemoveDeadBrick(BrickModel);
 };
 
 #endif // GAMEMODEL_H

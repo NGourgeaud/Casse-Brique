@@ -5,7 +5,7 @@ BrickModel::BrickModel(int x, int y, int hp) {
     itsHP = hp;
     itsX = x;
     itsY = y;
-    itsRect = QRect(x, y, windowWidth*0.1, windowHeight*0.1);
+    itsRect = QRect(x, y, windowWidth*0.2, windowHeight*0.1);
 }
 
 int BrickModel::getItsX()
