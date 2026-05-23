@@ -34,3 +34,8 @@ void BrickModel::onHit()
     if (itsHP == 0)
         OnDeath();
 }
+
+void BrickModel::OnDeath()
+{
+
+}
