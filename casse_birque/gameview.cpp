@@ -32,5 +32,13 @@ void GameView::paintEvent(QPaintEvent*)
     QPainter p(this);
 
     drawBackGround(&p);
+
+    //raquette->draw(p);
+    //ball->draw(p);
+
+    QList<BrickModel *> brickList = *itsGameModel->getItsBricks();
+    for (BrickModel* b : brickList) {
+        brick->draw(&p, b);
+    }
 }
 

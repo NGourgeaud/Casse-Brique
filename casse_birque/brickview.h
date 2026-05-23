@@ -8,7 +8,7 @@ class BrickView
 {
 public:
     BrickView();
-    void draw(QPainter p, BrickModel brick);
+    void draw(QPainter *p, BrickModel *brick);
 };
 
 #endif // BRICKVIEW_H

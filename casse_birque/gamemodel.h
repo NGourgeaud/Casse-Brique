@@ -16,13 +16,15 @@ private:
     QList<BrickModel*> * bricks;
     int itsHP;
     int itsScore;
+
+    void level1();
 public:
     GameModel();
-    const RaquetteModel* getItsRaquette();
-    const BallModel* getItsball();
-    const QList<BrickModel*>* getItsBricks();
-    int getItsHP();
-    int getItsScore();
+    const RaquetteModel* getItsRaquette() const;
+    const BallModel* getItsball() const;
+    const QList<BrickModel*>* getItsBricks() const;
+    int getItsHP() const;
+    int getItsScore() const;
 signals:
     void GameOver(int score);
 };
