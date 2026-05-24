@@ -20,8 +20,8 @@ void GameModel::Testlevel()
 }
 
 GameModel::GameModel() {
-    ball = new BallModel;
-    raquette = new RaquetteModel;
+    raquette = new RaquetteModel(windowWidth/2 - 50, 50, 100, 20, 8);
+    ball = new BallModel(windowWidth/2 - 10, 70);
     bricks = new QList<BrickModel *>;
     itsHP = 3;
     itsScore = 0;
@@ -64,10 +64,11 @@ void GameModel::setMovementRight(bool sw)
 
 }
 
-void GameModel::RemoveDeadBrick(BrickModel brick)
+void GameModel::RemoveDeadBrick(BrickModel *brick)
 {
-    disconnect(&brick);
-    bricks->remove(bricks->indexOf(&brick));
+    disconnect(brick, &BrickModel::OnDeath, this, &GameModel::RemoveDeadBrick);
+    bricks->removeOne(brick);
+    delete brick;
 }
 
 

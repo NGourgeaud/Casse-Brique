@@ -28,14 +28,9 @@ QRect BrickModel::getItsRect()
     return itsRect;
 }
 
-void BrickModel::onHit()
+void BrickModel::takeDamage()
 {
     itsHP-=1;
     if (itsHP == 0)
-        OnDeath();
-}
-
-void BrickModel::OnDeath()
-{
-
+        emit OnDeath(this);
 }

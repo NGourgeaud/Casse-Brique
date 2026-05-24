@@ -1,6 +1,6 @@
 #ifndef BRICKMODEL_H
 #define BRICKMODEL_H
-#include "qobject.h"
+#include <QObject>
 #include <QRect>
 
 class BrickModel : public QObject
@@ -18,10 +18,9 @@ public:
     int getItsY();
     int getItsHP();
     QRect getItsRect();
-public slots:
-    void onHit();
+    void takeDamage();
 signals:
-    void OnDeath();
+    void OnDeath(BrickModel* brick);
 };
 
 #endif // BRICKMODEL_H

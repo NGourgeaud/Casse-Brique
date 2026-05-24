@@ -1,6 +1,7 @@
 #include "ballmodel.h"
 #include "config.h"
 
+
 void BallModel::setItsSpeedX(double newItsSpeedX)
 {
     itsSpeedX = newItsSpeedX;
@@ -33,7 +34,7 @@ void BallModel::move(const std::list<BrickModel*>& allBricks, const RaquetteMode
     // Vérification de la collision
     collisionRaquette(Raquette);
     for (BrickModel * brick : allBricks)
-        collisionBrick(brick->getRect());
+        collisionBrick(brick);
     collisionWall();
 
     // Empêche la balle de rebondir à l'infinie sur un axe
@@ -60,7 +61,6 @@ void BallModel::collisionRaquette(const RaquetteModel& laRaquette){
     // Si il y a une collision = rebond
     // CAS 1 : Colision en haut ou en bas de la raquette
     if (inter.width() > inter.height()) {
-        // CORRECTION ICI : < au lieu de >
         if(itsHitBox.center().y() < Raquette.center().y()){
             itsHitBox.moveBottom(Raquette.top());
         }
@@ -101,46 +101,51 @@ void BallModel::collisionRaquette(const RaquetteModel& laRaquette){
     }
 }
 
-void BallModel::collisionBrick(const QRect& brick){
+void BallModel::collisionBrick(BrickModel * brick){
+
+    QRect brickRect = brick->getItsRect();
 
     // Contient la zone où les deux rectangles se touchent
-    QRect inter = itsHitBox.intersected(brick);
+    QRect inter = itsHitBox.intersected(brickRect);
 
     // Pas de collision
     if (inter.isEmpty())
         return;
 
+    // Applique les dégâts à la brique
+    brick->takeDamage();
+
     // Si il y a une collision = rebond
     // CAS 1 : Colision en haut ou en bas de la brique
     if (inter.width() > inter.height()) {
-        if(itsHitBox.center().y() < brick.center().y()) {
-            itsHitBox.moveBottom(brick.top());
+        if(itsHitBox.center().y() < brickRect.center().y()) {
+            itsHitBox.moveBottom(brickRect.top());
         } else {
-            itsHitBox.moveTop(brick.bottom());
+            itsHitBox.moveTop(brickRect.bottom());
         }
         itsSpeedY = -itsSpeedY;
     }
     // CAS 2 : Colision sur les côtés de la brique (gauche ou droit)
     else if (inter.height() > inter.width()) {
-        if(itsHitBox.center().x() < brick.center().x()) {
-            itsHitBox.moveRight(brick.left());
+        if(itsHitBox.center().x() < brickRect.center().x()) {
+            itsHitBox.moveRight(brickRect.left());
         } else {
-            itsHitBox.moveLeft(brick.right());
+            itsHitBox.moveLeft(brickRect.right());
         }
         itsSpeedX = -itsSpeedX;
     }
     // CAS 3 : Colision pile sur un coin (largeur == hauteur)
     else {
-        if(itsHitBox.center().y() < brick.center().y()) {
-            itsHitBox.moveBottom(brick.top());
+        if(itsHitBox.center().y() < brickRect.center().y()) {
+            itsHitBox.moveBottom(brickRect.top());
         } else {
-            itsHitBox.moveTop(brick.bottom());
+            itsHitBox.moveTop(brickRect.bottom());
         }
 
-        if(itsHitBox.center().x() < brick.center().x()) {
-            itsHitBox.moveRight(brick.left());
+        if(itsHitBox.center().x() < brickRect.center().x()) {
+            itsHitBox.moveRight(brickRect.left());
         } else {
-            itsHitBox.moveLeft(brick.right());
+            itsHitBox.moveLeft(brickRect.right());
         }
 
         itsSpeedX = -itsSpeedX;

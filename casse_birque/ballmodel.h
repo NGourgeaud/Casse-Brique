@@ -17,7 +17,7 @@ private :
 public:
     BallModel(double startPosX, double startPosY);
     void move(const std::list<BrickModel*>& allBricks, const RaquetteModel &laRaquette);    void collisionRaquette(const RaquetteModel& laRaquette);
-    void collisionBrick(const QRect &brick);
+    void collisionBrick(BrickModel *brick);
     void collisionWall();
 
     void setItsSpeedX(double newItsSpeedX);

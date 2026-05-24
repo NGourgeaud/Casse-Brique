@@ -1,12 +1,12 @@
 #include "gameview.h"
 #include "config.h"
 #include <QPainter>
-
+#include "gamemodel.h"
 
 GameView::GameView(const GameModel * GameModel)
 {
     itsGameModel = GameModel;
-    raquette = new RaquetteView();
+    raquette = new RaquetteView(itsGameModel->getItsRaquette());
     balle = new BallView();
     brick = new BrickView();
     setFixedSize(windowWidth,windowHeight);
