@@ -4,6 +4,7 @@
 #include "ballview.h"
 #include "brickview.h"
 #include "gamemodel.h"
+#include "qlabel.h"
 #include "raquetteview.h"
 #include <QWidget>
 #include <QKeyEvent>
@@ -18,6 +19,9 @@ private:
     BallView * balle;
     BrickView* brick;
     const GameModel * itsGameModel;
+    QLabel * itsScore;
+    QLabel * itsHP;
+
 
     void drawBackGround(QPainter *p);
 

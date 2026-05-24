@@ -14,6 +14,8 @@ SOURCES += \
     brickview.cpp \
     gamecontroller.cpp \
     gamemodel.cpp \
+    gameovercontroler.cpp \
+    gameoverview.cpp \
     gameview.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -32,6 +34,8 @@ HEADERS += \
     config.h \
     gamecontroller.h \
     gamemodel.h \
+    gameovercontroler.h \
+    gameoverview.h \
     gameview.h \
     mainwindow.h \
     menucontroler.h \

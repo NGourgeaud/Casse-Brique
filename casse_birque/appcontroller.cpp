@@ -7,11 +7,16 @@ AppControler::AppControler(QObject *parent) : QObject(parent)
     itsMainWindow = new MainWindow();
     itsMenuControler = new MenuControler();
     itsGameControler = new GameController(parent);
+    itsGameOverControler = new GameOverControler();
 
     // 2. CONNEXIONS : On écoute les signaux du MenuControler
     // Quand le menu dit "GameRequested", l'AppControler lance son slot "onGameRequested"
     connect(itsMenuControler, &MenuControler::GameRequested, this, &AppControler::onGameRequested);
     connect(itsMenuControler, &MenuControler::ScoreRequested, this, &AppControler::onScoreRequested);
+
+    connect(itsGameControler, &GameController::GameOver, this, &AppControler::onGameOver);
+
+    connect(itsGameOverControler, &GameOverControler::menuRequested, this, &AppControler::onMenuRequested);
 
     // Si le joueur clique sur Quitter dans le menu, on ferme l'application
     connect(itsMenuControler, &MenuControler::QuitRequested, qApp, &QApplication::quit);
@@ -68,4 +73,6 @@ void AppControler::onScoreRequested()
 void AppControler::onGameOver(int score)
 {
     // Logique quand la partie est perdue
+    itsGameControler->destroyView();
+    itsMainWindow->setCentralWidget(itsGameOverControler->makeView(score));
 }

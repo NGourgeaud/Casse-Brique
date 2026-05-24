@@ -3,11 +3,11 @@
 
 void GameModel::Testlevel()
 {
-    BrickModel * brick1 = new BrickModel(30,10,1);
-    BrickModel * brick2 = new BrickModel(50 + (windowWidth*0.2), 10, 2);
-    BrickModel * brick3 = new BrickModel(70 + (windowWidth*0.2)*2, 10, 3);
-    BrickModel * brick4 = new BrickModel(90 + (windowWidth*0.2)*3, 10, 1);
-    BrickModel * brick5 = new BrickModel(30, 30 + (windowHeight*0.1), 1);
+    BrickModel * brick1 = new BrickModel(30,50,1);
+    BrickModel * brick2 = new BrickModel(50 + (windowWidth*0.2), 50, 2);
+    BrickModel * brick3 = new BrickModel(70 + (windowWidth*0.2)*2, 50, 3);
+    BrickModel * brick4 = new BrickModel(90 + (windowWidth*0.2)*3, 50, 1);
+    BrickModel * brick5 = new BrickModel(30, 70 + (windowHeight*0.1), 1);
     bricks->append(brick1);
     bricks->append(brick2);
     bricks->append(brick3);
@@ -27,6 +27,7 @@ GameModel::GameModel() {
     itsScore = 0;
 
     Testlevel();
+    connect(ball, &BallModel::lifeLost, this, &GameModel::onLifeLost);
 }
 
 void GameModel::update(){
@@ -73,6 +74,15 @@ void GameModel::RemoveDeadBrick(BrickModel * brick)
 {
     disconnect(brick);
     bricks->remove(bricks->indexOf(brick));
+    itsScore+=10;
+}
+
+void GameModel::onLifeLost()
+{
+    itsHP-=1;
+    raquette->resetPos();
+    if (itsHP == 0)
+        GameOver(itsScore);
 }
 
 

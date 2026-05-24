@@ -35,6 +35,7 @@ public slots:
     void setMovementLeft(bool sw);
     void setMovementRight(bool sw);
     void RemoveDeadBrick(BrickModel * brick);
+    void onLifeLost();
 };
 
 #endif // GAMEMODEL_H

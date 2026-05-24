@@ -3,34 +3,50 @@
 GameController::GameController(QObject *parent)
     : QObject(parent)
 {
-    // Créer le modèle et la vue
-    itsGameModel = new GameModel();
-    itsGameView  = new GameView(itsGameModel);
-
-    // Relayer les événements clavier de la vue vers ce contrôleur
-    connect(itsGameView, &GameView::keyPressed,  this, &GameController::onKeyPressed);
-    connect(itsGameView, &GameView::keyReleased, this, &GameController::onKeyReleased);
-
-    // Boucle de jeu à ~60 fps (16 ms)
     itsTimer = new QTimer(this);
-    connect(itsTimer, &QTimer::timeout, this, &GameController::onTick);
 }
 
 GameController::~GameController()
 {
-    delete itsGameModel;
-    delete itsGameView;
+    itsTimer->stop();
+
+    disconnect(itsGameModel);
+    disconnect(itsGameView);
+
+    itsGameModel->deleteLater();
+    itsGameView->deleteLater();
+    itsGameModel = nullptr;
+    itsGameView = nullptr;
 }
 
 QWidget *GameController::createView()
 {
+    itsGameModel = new GameModel();
+    itsGameView  = new GameView(itsGameModel);
+
+    connect(itsTimer, &QTimer::timeout, this, &GameController::onTick);
+
+
+    connect(itsGameView, &GameView::keyPressed,  this, &GameController::onKeyPressed);
+    connect(itsGameView, &GameView::keyReleased, this, &GameController::onKeyReleased);
+
+    connect(itsGameModel, &GameModel::GameOver, this, &GameController::GameOver);
+
     itsTimer->start(16);
     return itsGameView;
 }
 
 void GameController::destroyView()
 {
+    itsTimer->stop();
 
+    disconnect(itsGameModel);
+    disconnect(itsGameView);
+
+    itsGameModel->deleteLater();
+    itsGameView->deleteLater();
+    itsGameModel = nullptr;
+    itsGameView = nullptr;
 }
 
 // ---------------------------------------------------------------------------
@@ -42,7 +58,8 @@ void GameController::onTick()
     // 1. Avancer la simulation
     itsGameModel->update();
     // 2. Demander un repaint
-    itsGameView->refresh();
+    if (itsGameView)
+        itsGameView->refresh();
 }
 
 void GameController::onKeyPressed(int key)

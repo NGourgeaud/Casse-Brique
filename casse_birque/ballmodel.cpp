@@ -17,12 +17,19 @@ QRect BallModel::getItsHitBox() const
     return itsHitBox;
 }
 
-BallModel::BallModel(double startPosX, double startPosY)
-    : itsHitBox(startPosX, startPosY, 20, 20)
+BallModel::BallModel(double sPosX, double sPosY)
+    : itsHitBox(sPosX, sPosY, 20, 20)
 {
+    startPosX = sPosX;
+    startPosY = sPosY;
     itsSpeedX = 5;
     itsSpeedY = 5;
     itsOnTheGround = false;
+}
+
+void BallModel::startPosition()
+{
+    itsHitBox.moveTo(startPosX, startPosY);
 }
 
 void BallModel::move(QList<BrickModel*> allBricks, RaquetteModel * Raquette){
@@ -44,6 +51,13 @@ void BallModel::move(QList<BrickModel*> allBricks, RaquetteModel * Raquette){
     else if(itsSpeedY == 0) {
         itsSpeedY = 1;
     }
+
+    // Vérification de bas de terrain touché
+    if (itsHitBox.bottomLeft().y() >= windowHeight){
+        lifeLost();
+        startPosition();
+    }
+
 }
 
 void BallModel::collisionRaquette(RaquetteModel * laRaquette){

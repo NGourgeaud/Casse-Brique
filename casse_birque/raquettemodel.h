@@ -11,6 +11,8 @@ private:
     float itsSpeed;
     bool itsMoveRight;
     bool itsMoveLeft;
+
+    int startPosX;
 public:
     RaquetteModel(int posX, int posY);
     int getItsPosX() const;
@@ -19,7 +21,7 @@ public:
     int getItsLargeur() const;
     int getItsSpeed() const;
 
-    void setPosX(int newX);
+    void resetPos();
     void moveRight();
     void moveLeft();
     void move();

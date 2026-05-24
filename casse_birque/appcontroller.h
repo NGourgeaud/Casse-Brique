@@ -2,6 +2,7 @@
 #define APPCONTROLER_H
 
 #include <QObject>
+#include "gameovercontroler.h"
 #include "mainwindow.h"
 #include "menucontroler.h"
 #include "gamecontroller.h"
@@ -15,6 +16,7 @@ private:
     MainWindow* itsMainWindow;
     MenuControler* itsMenuControler;
     GameController* itsGameControler;
+    GameOverControler * itsGameOverControler;
 
 public:
     explicit AppControler(QObject *parent = nullptr);

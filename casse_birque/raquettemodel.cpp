@@ -6,6 +6,8 @@ RaquetteModel::RaquetteModel(int posX, int posY){
     itsPosX = posX;
     itsPosY = posY;
 
+    startPosX = posX;
+
     itsLargeur = windowWidth*0.1;
     itsHauteur = 10;
 
@@ -39,8 +41,8 @@ int RaquetteModel::getItsSpeed() const{
 // Setter
 
 
-void RaquetteModel::setPosX(int newX) {
-    itsPosX = newX;
+void RaquetteModel::resetPos() {
+    itsPosX = startPosX;
 }
 
 void RaquetteModel::setItsMoveRight(bool newItsMoveRight)
