@@ -32,5 +32,5 @@ void BrickModel::takeDamage()
 {
     itsHP-=1;
     if (itsHP == 0)
-        emit OnDeath(this);
+        OnDeath(this);
 }

@@ -1,14 +1,11 @@
 #include "ballview.h"
 #include "qwindowdefs.h"
 
-void BallView::setItsModel(BallModel *newItsModel)
-{
-    itsModel = newItsModel;
-}
 
-BallView::BallView()
-    :itsColor(255,0,0), itsModel(nullptr)
-{}
+BallView::BallView(const BallModel *model) :itsColor(255,0,0), itsModel(model)
+{
+
+}
 
 void BallView::draw(QPainter *painter)
 {

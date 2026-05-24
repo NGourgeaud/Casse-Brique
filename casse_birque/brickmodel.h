@@ -20,7 +20,7 @@ public:
     QRect getItsRect();
     void takeDamage();
 signals:
-    void OnDeath(BrickModel* brick);
+    void OnDeath(BrickModel * model);
 };
 
 #endif // BRICKMODEL_H

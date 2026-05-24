@@ -11,7 +11,7 @@ private:
     float itsSpeed;
 
 public:
-    RaquetteModel(int posX, int posY, int largeur, int hateur, int speed);
+    RaquetteModel(int posX, int posY);
     int getItsPosX() const;
     int getItsPosY() const;
     int getItsHauteur() const;

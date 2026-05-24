@@ -1,7 +1,7 @@
 #include "raquetteview.h"
 
 // Initialisation de la vue avec le modèle et une couleur par défaut
-RaquetteView::RaquetteView(const RaquetteModel* m) {
+RaquetteView::RaquetteView(const RaquetteModel * m) {
     itsModel = m;
     itsColor = QColor(Qt::darkGray); // Tu peux choisir la couleur que tu souhaites
 }

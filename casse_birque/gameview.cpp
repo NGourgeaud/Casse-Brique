@@ -6,8 +6,8 @@
 GameView::GameView(const GameModel * GameModel)
 {
     itsGameModel = GameModel;
-    raquette = new RaquetteView(itsGameModel->getItsRaquette());
-    balle = new BallView();
+    raquette = new RaquetteView(GameModel->getItsRaquette());
+    balle = new BallView(GameModel->getItsball());
     brick = new BrickView();
     setFixedSize(windowWidth,windowHeight);
 }
@@ -33,8 +33,8 @@ void GameView::paintEvent(QPaintEvent*)
 
     drawBackGround(&p);
 
-    //raquette->draw(p);
-    //ball->draw(p);
+    raquette->draw(&p);
+    balle->draw(&p);
 
     QList<BrickModel *> brickList = *itsGameModel->getItsBricks();
     for (BrickModel* b : brickList) {
