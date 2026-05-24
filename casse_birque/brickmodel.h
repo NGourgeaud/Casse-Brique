@@ -21,7 +21,7 @@ public:
 public slots:
     void onHit();
 signals:
-    void OnDeath();
+    void OnDeath(BrickModel * model);
 };
 
 #endif // BRICKMODEL_H

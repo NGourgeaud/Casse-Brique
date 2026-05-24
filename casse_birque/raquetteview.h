@@ -9,11 +9,11 @@ class RaquetteView
 {
 private:
     QColor itsColor;
-    RaquetteModel* itsModel; // Pointeur vers le modèle (lien indiqué par les pointillés/paramètres du diagramme)
+    const RaquetteModel* itsModel; // Pointeur vers le modèle (lien indiqué par les pointillés/paramètres du diagramme)
 
 public:
     // Constructeur conforme au diagramme : RaquetteView(m : RaquetteModel*)
-    RaquetteView(RaquetteModel* m);
+    RaquetteView(const RaquetteModel* m);
 
     // Méthode de dessin avec QPainter (standard sous Qt)
     void draw(QPainter *painter);

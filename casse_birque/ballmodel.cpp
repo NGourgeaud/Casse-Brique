@@ -33,7 +33,7 @@ void BallModel::move(const std::list<BrickModel*>& allBricks, const RaquetteMode
     // Vérification de la collision
     collisionRaquette(Raquette);
     for (BrickModel * brick : allBricks)
-        collisionBrick(brick->getRect());
+        collisionBrick(brick->getItsRect());
     collisionWall();
 
     // Empêche la balle de rebondir à l'infinie sur un axe

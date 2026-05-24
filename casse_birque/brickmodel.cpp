@@ -32,10 +32,5 @@ void BrickModel::onHit()
 {
     itsHP-=1;
     if (itsHP == 0)
-        OnDeath();
-}
-
-void BrickModel::OnDeath()
-{
-
+        OnDeath(this);
 }
