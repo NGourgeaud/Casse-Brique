@@ -12,7 +12,7 @@ private:
     bool itsMoveRight;
     bool itsMoveLeft;
 public:
-    RaquetteModel(int posX, int posY, int largeur, int hateur, float speed);
+    RaquetteModel(int posX, int posY);
     int getItsPosX() const;
     int getItsPosY() const;
     int getItsHauteur() const;

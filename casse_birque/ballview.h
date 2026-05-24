@@ -11,8 +11,9 @@ private:
     QColor itsColor;
     const BallModel * itsModel;
 public:
-    BallView(const BallModel *m);
+    BallView(const BallModel * model);
     void draw(QPainter * painter);
+    void setItsModel();
 };
 
 #endif // BALLVIEW_H

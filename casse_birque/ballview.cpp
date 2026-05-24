@@ -2,8 +2,8 @@
 #include "qwindowdefs.h"
 
 
-BallView::BallView(const BallModel * m)
-    :itsColor(255,0,0), itsModel(m)
+BallView::BallView(const BallModel * model)
+    :itsColor(255,0,0), itsModel(model)
 {}
 
 void BallView::draw(QPainter * painter)

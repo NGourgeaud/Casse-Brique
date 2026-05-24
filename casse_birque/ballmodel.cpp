@@ -20,8 +20,8 @@ QRect BallModel::getItsHitBox() const
 BallModel::BallModel(double startPosX, double startPosY)
     : itsHitBox(startPosX, startPosY, 20, 20)
 {
-    itsSpeedX = 0;
-    itsSpeedY = 0;
+    itsSpeedX = 5;
+    itsSpeedY = 5;
     itsOnTheGround = false;
 }
 

@@ -34,7 +34,7 @@ signals:
 public slots:
     void setMovementLeft(bool sw);
     void setMovementRight(bool sw);
-    void RemoveDeadBrick(BrickModel* brick);
+    void RemoveDeadBrick(BrickModel * brick);
 };
 
 #endif // GAMEMODEL_H

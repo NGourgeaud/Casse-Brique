@@ -1,17 +1,18 @@
 #include "raquettemodel.h"
 #include "config.h"
 
-RaquetteModel::RaquetteModel(int posX, int posY, int largeur, int hauteur, float speed){
+
+RaquetteModel::RaquetteModel(int posX, int posY){
     itsPosX = posX;
     itsPosY = posY;
 
-    itsLargeur = largeur;
-    itsHauteur = hauteur;
-
-    itsSpeed = speed;
+    itsLargeur = windowWidth*0.1;
+    itsHauteur = 10;
 
     itsMoveRight = false;
     itsMoveLeft = false;
+
+    itsSpeed = 3;
 }
 
 // Getters
