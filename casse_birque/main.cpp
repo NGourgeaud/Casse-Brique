@@ -1,11 +1,12 @@
-#include "mainwindow.h"
-
 #include <QApplication>
+#include "appcontroller.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-    return QCoreApplication::exec();
+
+    // On crée le contrôleur principal. C'est lui qui va ouvrir la fenêtre et gérer le menu.
+    AppControler controler;
+
+    return a.exec();
 }
