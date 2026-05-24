@@ -2,7 +2,6 @@
 #define BALLMODEL_H
 
 #include <QRect>
-#include <list>
 #include "brickmodel.h"
 #include "raquettemodel.h"
 
@@ -16,7 +15,8 @@ private :
     bool itsOnTheGround;
 public:
     BallModel(double startPosX, double startPosY);
-    void move(const std::list<BrickModel*>& allBricks, const RaquetteModel &laRaquette);    void collisionRaquette(const RaquetteModel& laRaquette);
+    void move(QList<BrickModel *> allBricks, RaquetteModel *laRaquette);
+    void collisionRaquette(RaquetteModel *laRaquette);
     void collisionBrick(BrickModel *brick);
     void collisionWall();
 

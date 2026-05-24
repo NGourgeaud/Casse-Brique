@@ -1,16 +1,12 @@
 #include "ballview.h"
 #include "qwindowdefs.h"
 
-void BallView::setItsModel(BallModel *newItsModel)
-{
-    itsModel = newItsModel;
-}
 
-BallView::BallView()
-    :itsColor(255,0,0), itsModel(nullptr)
+BallView::BallView(const BallModel * m)
+    :itsColor(255,0,0), itsModel(m)
 {}
 
-void BallView::draw(QPainter *painter)
+void BallView::draw(QPainter * painter)
 {
     // On vérifie que la baalle existe
     if (itsModel != nullptr && painter != nullptr) {

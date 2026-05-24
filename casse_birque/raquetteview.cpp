@@ -3,7 +3,7 @@
 // Initialisation de la vue avec le modèle et une couleur par défaut
 RaquetteView::RaquetteView(const RaquetteModel* m) {
     itsModel = m;
-    itsColor = QColor(Qt::darkGray); // Tu peux choisir la couleur que tu souhaites
+    itsColor = QColor(Qt::darkGray);
 }
 
 // Implémentation de la méthode draw

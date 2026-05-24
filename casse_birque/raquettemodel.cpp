@@ -1,6 +1,7 @@
 #include "raquettemodel.h"
+#include "config.h"
 
-RaquetteModel::RaquetteModel(int posX, int posY, int largeur, int hauteur, int speed){
+RaquetteModel::RaquetteModel(int posX, int posY, int largeur, int hauteur, float speed){
     itsPosX = posX;
     itsPosY = posY;
 
@@ -8,6 +9,9 @@ RaquetteModel::RaquetteModel(int posX, int posY, int largeur, int hauteur, int s
     itsHauteur = hauteur;
 
     itsSpeed = speed;
+
+    itsMoveRight = false;
+    itsMoveLeft = false;
 }
 
 // Getters
@@ -38,12 +42,34 @@ void RaquetteModel::setPosX(int newX) {
     itsPosX = newX;
 }
 
-// Methode
-
-void RaquetteModel::moveLeft(){
-    itsPosX -= itsSpeed;
+void RaquetteModel::setItsMoveRight(bool newItsMoveRight)
+{
+    itsMoveRight = newItsMoveRight;
 }
 
-void RaquetteModel::moveRight(){
-    itsPosX += itsSpeed;
+void RaquetteModel::setItsMoveLeft(bool newItsMoveLeft)
+{
+    itsMoveLeft = newItsMoveLeft;
+}
+
+// Methode
+
+void RaquetteModel::move(){
+
+    // Déplacement droite/gauche
+    if (itsMoveRight) {
+        itsPosX += itsSpeed;
+    }
+    if (itsMoveLeft) {
+        itsPosX -= itsSpeed;
+    }
+
+    // Collision avec le bord gauche
+    if (itsPosX < 0) {
+        itsPosX = 0;
+    }
+    // Collision avec le bord droit
+    else if(itsPosX + itsLargeur > windowWidth) {
+        itsPosX = windowWidth - itsLargeur;
+    }
 }

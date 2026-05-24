@@ -9,9 +9,10 @@ private:
     int itsHauteur;
     int itsLargeur;
     float itsSpeed;
-
+    bool itsMoveRight;
+    bool itsMoveLeft;
 public:
-    RaquetteModel(int posX, int posY, int largeur, int hateur, int speed);
+    RaquetteModel(int posX, int posY, int largeur, int hateur, float speed);
     int getItsPosX() const;
     int getItsPosY() const;
     int getItsHauteur() const;
@@ -21,6 +22,9 @@ public:
     void setPosX(int newX);
     void moveRight();
     void moveLeft();
+    void move();
+    void setItsMoveRight(bool newItsMoveRight);
+    void setItsMoveLeft(bool newItsMoveLeft);
 };
 
 #endif // RAQUETTEMODEL_H

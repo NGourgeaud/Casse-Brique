@@ -9,11 +9,10 @@ class BallView
 {
 private:
     QColor itsColor;
-    BallModel * itsModel;
+    const BallModel * itsModel;
 public:
-    BallView();
+    BallView(const BallModel *m);
     void draw(QPainter * painter);
-    void setItsModel(BallModel *newItsModel);
 };
 
 #endif // BALLVIEW_H

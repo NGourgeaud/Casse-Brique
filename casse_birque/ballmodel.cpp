@@ -25,7 +25,7 @@ BallModel::BallModel(double startPosX, double startPosY)
     itsOnTheGround = false;
 }
 
-void BallModel::move(const std::list<BrickModel*>& allBricks, const RaquetteModel& Raquette){
+void BallModel::move(QList<BrickModel*> allBricks, RaquetteModel * Raquette){
     // Faire en sorte que si la balle ne touche rien on ajoute au coordonnée
 
     // Déplacement de la bale
@@ -46,10 +46,10 @@ void BallModel::move(const std::list<BrickModel*>& allBricks, const RaquetteMode
     }
 }
 
-void BallModel::collisionRaquette(const RaquetteModel& laRaquette){
+void BallModel::collisionRaquette(RaquetteModel * laRaquette){
 
     // On dessine la raquette virtuellement avec un QRect
-    QRect Raquette(laRaquette.getItsPosX(),laRaquette.getItsPosY(),laRaquette.getItsLargeur(),laRaquette.getItsHauteur());
+    QRect Raquette(laRaquette->getItsPosX(),laRaquette->getItsPosY(),laRaquette->getItsLargeur(),laRaquette->getItsHauteur());
 
     // Contient la zone où les deux rectangles se touchent
     QRect inter = itsHitBox.intersected(Raquette);
