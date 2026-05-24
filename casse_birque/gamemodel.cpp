@@ -56,12 +56,12 @@ int GameModel::getItsScore() const
 
 void GameModel::setMovementLeft(bool sw)
 {
-
+    raquette->moveLeft();
 }
 
 void GameModel::setMovementRight(bool sw)
 {
-
+    raquette->moveRight();
 }
 
 void GameModel::RemoveDeadBrick(BrickModel * brick)
