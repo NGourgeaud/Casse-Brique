@@ -23,9 +23,6 @@ QWidget* MenuControler::createView()
 
 void MenuControler::destroyView()
 {
-    // On libère la mémoire proprement si la vue existe
-    if (itsview != nullptr) {
-        delete itsview;
-        itsview = nullptr;
-    }
+    // C'est la mainwindow qui s'occupe de la détruire
+    itsview = nullptr;
 }

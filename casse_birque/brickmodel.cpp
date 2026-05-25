@@ -1,11 +1,21 @@
 #include "brickmodel.h"
 #include "config.h"
 
-BrickModel::BrickModel(int x, int y, int hp) {
+int BrickModel::getItsWidth() const
+{
+    return itsWidth;
+}
+
+int BrickModel::getItsHeight() const
+{
+    return itsHeight;
+}
+
+BrickModel::BrickModel(int x, int y, int w, int h, int hp) {
     itsHP = hp;
     itsX = x;
     itsY = y;
-    itsRect = QRect(x, y, windowWidth*0.2, windowHeight*0.1);
+    itsRect = QRect(x, y, w, h);
 }
 
 int BrickModel::getItsX()

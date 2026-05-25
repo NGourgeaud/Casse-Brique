@@ -17,8 +17,6 @@ private:
     int itsHP;
     int itsScore;
 
-    void Testlevel();
-
 public:
     GameModel();
     void update();
@@ -27,6 +25,7 @@ public:
     const QList<BrickModel*>* getItsBricks() const;
     int getItsHP() const;
     int getItsScore() const;
+    void loadLevel(int level);
 
 signals:
     void GameOver(int score);

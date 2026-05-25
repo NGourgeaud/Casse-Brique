@@ -14,6 +14,10 @@ GameView::GameView(const GameModel * GameModel)
 
     itsScore = new QLabel("Score : 0", this);
     itsHP = new QLabel("Hp : 3", this);
+
+    itsScore->setStyleSheet("color: white; font-size: 20px; font-weight: bold; margin: 10px;");
+    itsHP->setStyleSheet("color: white; font-size: 20px; font-weight: bold; margin: 10px;");
+
     QHBoxLayout * hud = new QHBoxLayout;
     hud->addWidget(itsScore);
     hud->addStretch();
@@ -30,6 +34,14 @@ GameView::GameView(const GameModel * GameModel)
 
 void GameView::refresh()
 {
+    // Mise à jour des texte
+    int health = itsGameModel->getItsHP();
+    itsHP->setText("Hp : " + QString::number(health));
+
+    int score = itsGameModel->getItsScore();
+    itsScore->setText("Score : " + QString::number(score));
+
+    // Appelle de paintEvent
     update();
 }
 
@@ -47,16 +59,6 @@ void GameView::paintEvent(QPaintEvent*)
     QPainter p(this);
 
     drawBackGround(&p);
-
-    // updates score and health
-    int health = itsGameModel->getItsHP();
-    QString hptext = "Hp : " + QString::number(health);
-    itsHP->setText(hptext);
-
-    int score = itsGameModel->getItsScore();
-    QString scoretext = "Score : " + QString::number(score);
-    itsScore->setText(scoretext);
-
 
     raquette->draw(&p);
     balle->draw(&p);

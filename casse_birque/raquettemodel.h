@@ -27,6 +27,7 @@ public:
     void move();
     void setItsMoveRight(bool newItsMoveRight);
     void setItsMoveLeft(bool newItsMoveLeft);
+    void setItsSpeed(float newItsSpeed);
 };
 
 #endif // RAQUETTEMODEL_H

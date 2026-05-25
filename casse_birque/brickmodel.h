@@ -10,15 +10,21 @@ class BrickModel : public QObject
 private :
     int itsX;
     int itsY;
+    int itsWidth;
+    int itsHeight;
     QRect itsRect;
     int itsHP;
 public:
-    BrickModel(int x, int y, int hp);
+    BrickModel(int x, int y, int width, int height, int hp = 1);
     int getItsX();
     int getItsY();
     int getItsHP();
     QRect getItsRect();
     void takeDamage();
+    int getItsWidth() const;
+
+    int getItsHeight() const;
+
 signals:
     void OnDeath(BrickModel * model);
 };

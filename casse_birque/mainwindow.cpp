@@ -9,9 +9,3 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 MainWindow::~MainWindow() {}
 
-// Implémentation de la méthode du diagramme
-void MainWindow::setCentralWidget(QWidget* widget)
-{
-    // On appelle simplement la fonction d'origine de Qt pour changer l'affichage
-    QMainWindow::setCentralWidget(widget);
-}

@@ -2,6 +2,11 @@
 #include "config.h"
 
 
+void RaquetteModel::setItsSpeed(float newItsSpeed)
+{
+    itsSpeed = newItsSpeed;
+}
+
 RaquetteModel::RaquetteModel(int posX, int posY){
     itsPosX = posX;
     itsPosY = posY;

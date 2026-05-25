@@ -42,6 +42,7 @@ void GameController::destroyView()
 
     disconnect(itsGameModel);
     disconnect(itsGameView);
+    disconnect(itsTimer, &QTimer::timeout, this, &GameController::onTick);
 
     itsGameModel->deleteLater();
     itsGameView->deleteLater();
