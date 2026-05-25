@@ -54,7 +54,7 @@ void BallModel::move(QList<BrickModel*> allBricks, RaquetteModel * Raquette){
 
     // Vérification de bas de terrain touché
     if (itsHitBox.bottomLeft().y() >= windowHeight){
-        emit lifeLost();
+        lifeLost();
         startPosition();
         itsSpeedX = 5;
         itsSpeedY = 5;

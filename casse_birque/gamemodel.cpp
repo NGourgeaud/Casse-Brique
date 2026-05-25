@@ -7,8 +7,9 @@ GameModel::GameModel() {
     bricks = new QList<BrickModel *>;
     itsHP = 3;
     itsScore = 0;
+    itsCurentLevel = 1;
 
-    loadLevel(1);
+    loadLevel(itsCurentLevel);
 
     connect(ball, &BallModel::lifeLost, this, &GameModel::onLifeLost);
 }
@@ -59,7 +60,14 @@ void GameModel::RemoveDeadBrick(BrickModel * brick)
     bricks->remove(bricks->indexOf(brick));
     delete brick;
     itsScore+=10;
-
+    if (bricks->empty())
+    {
+        itsCurentLevel++;
+        ball->startPosition();
+        raquette->resetPos();
+        if (itsCurentLevel <4)
+            loadLevel(itsCurentLevel);
+    }
 }
 
 void GameModel::onLifeLost()
@@ -72,42 +80,38 @@ void GameModel::onLifeLost()
 
 void GameModel::loadLevel(int level)
 {
-    // 1. Initialisation des variables selon le niveau
-    int ballSpeed = 5;
-    int raquetteSpeed = 10;
-    int totalBricks = 10;
-    int doubleLifeBricks = 5;
+    // Initialisation des variables selon le niveau
+    int ballSpeed;
+    int raquetteSpeed;
+    int totalBricks;
+    int doubleLifeBricks;
+    int tripleLifeBricks;
 
     switch (level) {
     case 1: // Niveau 1 - Noyau
-        ballSpeed = 5; raquetteSpeed = 10; totalBricks = 10; doubleLifeBricks = 5;
+        ballSpeed = 5; raquetteSpeed = 10; totalBricks = 10; doubleLifeBricks = 5; tripleLifeBricks = 0;
         break;
     case 2: // Niveau 2 - Manteau
-        ballSpeed = 6; raquetteSpeed = 9; totalBricks = 15; doubleLifeBricks = 10;
+        ballSpeed = 6; raquetteSpeed = 9; totalBricks = 15; doubleLifeBricks = 6; tripleLifeBricks = 4;
         break;
     case 3: // Niveau 3 - Surface
-        ballSpeed = 7; raquetteSpeed = 8; totalBricks = 20; doubleLifeBricks = 15;
+        ballSpeed = 7; raquetteSpeed = 8; totalBricks = 20; doubleLifeBricks = 10; tripleLifeBricks = 5;
         break;
     }
 
-    // 2. Application des vitesses
+    // Application des vitesses
     ball->setItsSpeedX(ballSpeed);
     ball->setItsSpeedY(ballSpeed);
     raquette->setItsSpeed(raquetteSpeed);
 
-    // 3. Nettoyage de l'ancien niveau
-    for(BrickModel* b : *bricks) {
-        disconnect(b, &BrickModel::OnDeath, this, &GameModel::RemoveDeadBrick);
-        delete b;
-    }
-    bricks->clear();
 
-    // 4. Génération des briques
+    // Génération des briques
     int briquesParLigne = 5; // Car windowWidth * 0.2 = 5 briques max
     int currentDoubleLife = 0;
+    int currentTripleLife = 0;
     int gap = 10;
 
-    // On calcule la largeur et hauteur théoriques
+    // On calcule la largeur et hauteur des briques
     float cellWidth = windowWidth * 0.2;
     float cellHeight = windowHeight * 0.1;
 
@@ -125,7 +129,12 @@ void GameModel::loadLevel(int level)
 
         // Détermine si la brique a 1 ou 2 HP
         int hp = 1;
-        if (currentDoubleLife < doubleLifeBricks) {
+        if (currentTripleLife < tripleLifeBricks)
+        {
+            hp = 3;
+            currentTripleLife++;
+        }
+        else if (currentDoubleLife < doubleLifeBricks) {
             hp = 2;
             currentDoubleLife++;
         }

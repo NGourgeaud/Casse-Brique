@@ -16,6 +16,7 @@ private:
     QList<BrickModel*> * bricks;
     int itsHP;
     int itsScore;
+    int itsCurentLevel;
 
 public:
     GameModel();
