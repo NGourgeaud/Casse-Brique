@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "gameovercontroler.h"
+#include "gamewoncontroler.h"
 #include "mainwindow.h"
 #include "menucontroler.h"
 #include "gamecontroller.h"
@@ -17,6 +18,7 @@ private:
     MenuControler* itsMenuControler;
     GameController* itsGameControler;
     GameOverControler * itsGameOverControler;
+    GameWonControler * itsGameWonControler;
 
 public:
     explicit AppControler(QObject *parent = nullptr);
@@ -28,6 +30,7 @@ public slots:
     void onGameRequested();
     void onScoreRequested();
     void onGameOver(int score);
+    void onGameWon(int score);
 };
 
 #endif // APPCONTROLER_H

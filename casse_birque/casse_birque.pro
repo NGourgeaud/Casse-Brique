@@ -17,6 +17,8 @@ SOURCES += \
     gameovercontroler.cpp \
     gameoverview.cpp \
     gameview.cpp \
+    gamewoncontroler.cpp \
+    gamewonview.cpp \
     main.cpp \
     mainwindow.cpp \
     menucontroler.cpp \
@@ -37,6 +39,8 @@ HEADERS += \
     gameovercontroler.h \
     gameoverview.h \
     gameview.h \
+    gamewoncontroler.h \
+    gamewonview.h \
     mainwindow.h \
     menucontroler.h \
     menumodel.h \

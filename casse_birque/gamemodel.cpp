@@ -8,6 +8,7 @@ GameModel::GameModel() {
     itsHP = 3;
     itsScore = 0;
     itsCurentLevel = 1;
+    itsLevelChange = false;
 
     loadLevel(itsCurentLevel);
 
@@ -15,8 +16,17 @@ GameModel::GameModel() {
 }
 
 void GameModel::update(){
-    ball->move(*bricks,raquette);
-    raquette->move();
+    if (!itsLevelChange)
+    {
+        ball->move(*bricks,raquette);
+        raquette->move();
+    }
+    else
+    {
+        itsLevelChange = false;
+        ball->startPosition();
+        raquette->resetPos();
+    }
 }
 
 const RaquetteModel *GameModel::getItsRaquette() const
@@ -63,10 +73,13 @@ void GameModel::RemoveDeadBrick(BrickModel * brick)
     if (bricks->empty())
     {
         itsCurentLevel++;
-        ball->startPosition();
-        raquette->resetPos();
         if (itsCurentLevel <4)
+        {
+            itsLevelChange = true;
             loadLevel(itsCurentLevel);
+        }
+        else
+            GameWon(itsScore);
     }
 }
 

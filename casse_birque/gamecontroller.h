@@ -24,6 +24,7 @@ public:
 
 signals:
     void GameOver(int score);
+    void GameWon(int score);
 
 private slots:
     void onTick();

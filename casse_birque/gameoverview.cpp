@@ -1,8 +1,6 @@
 #include "gameoverview.h"
 #include "qboxlayout.h"
 
-
-
 GameOverView::GameOverView(int score, QWidget *parent)
 {
     texte = new QLabel("Game Over", this);

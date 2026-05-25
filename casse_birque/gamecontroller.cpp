@@ -31,6 +31,8 @@ QWidget *GameController::createView()
     connect(itsGameView, &GameView::keyReleased, this, &GameController::onKeyReleased);
 
     connect(itsGameModel, &GameModel::GameOver, this, &GameController::GameOver);
+    connect(itsGameModel, &GameModel::GameWon, this, &GameController::GameWon);
+
 
     itsTimer->start(16);
     return itsGameView;

@@ -17,6 +17,7 @@ private:
     int itsHP;
     int itsScore;
     int itsCurentLevel;
+    bool itsLevelChange;
 
 public:
     GameModel();
@@ -30,6 +31,7 @@ public:
 
 signals:
     void GameOver(int score);
+    void GameWon(int score);
 
 public slots:
     void setMovementLeft(bool sw);

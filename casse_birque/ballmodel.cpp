@@ -41,7 +41,9 @@ void BallModel::move(QList<BrickModel*> allBricks, RaquetteModel * Raquette){
     // Vérification de la collision
     collisionRaquette(Raquette);
     for (BrickModel * brick : allBricks)
+    {
         collisionBrick(brick);
+    }
     collisionWall();
 
     // Empêche la balle de rebondir à l'infinie sur un axe
