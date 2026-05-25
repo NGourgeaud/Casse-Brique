@@ -4,7 +4,7 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
     this->resize(windowWidth,windowHeight);
-    this->setWindowTitle("Casse-Briques");
+    this->setWindowTitle("Earth Escape");
 }
 
 MainWindow::~MainWindow() {}

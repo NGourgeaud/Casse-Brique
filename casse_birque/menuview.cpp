@@ -3,7 +3,7 @@
 MenuView::MenuView(QWidget *parent) : QWidget(parent)
 {
     // 1. Instanciation des éléments graphiques
-    itsTitle = new QLabel("Casse-Briques", this);
+    itsTitle = new QLabel("Earth Escape", this);
     itsTitle->setAlignment(Qt::AlignCenter); // Centre le texte
 
     itsPlayButton = new QPushButton("Jouer", this);
