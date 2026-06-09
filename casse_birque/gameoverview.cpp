@@ -1,7 +1,7 @@
 #include "gameoverview.h"
 #include "qboxlayout.h"
 
-GameOverView::GameOverView(int score, QWidget *parent)
+GameOverView::GameOverView(int score, QWidget *parent)q
 {
     texte = new QLabel("Game Over", this);
     QString textScore = "Score : " + QString::number(score);
