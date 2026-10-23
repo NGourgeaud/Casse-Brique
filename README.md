@@ -15,4 +15,5 @@ Pour compiler et exécuter ce projet localement, vous aurez besoin de :
 2.  **Via l'interface Qt Creator :**
     * Ouvrez le fichier `casse_birque.pro`.
     * Configurez votre kit.
+    * dans Projets --> Paramètres d'exécution activez Exécuter dans un terminal
     * Cliquez sur le marteau pour compiler, puis sur le bouton "Play" pour lancer le jeu.
